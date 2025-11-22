@@ -1,2 +1,2 @@
-# sptiHack2025
+# spitHack2025
 spit 2025 
