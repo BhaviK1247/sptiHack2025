@@ -5,10 +5,10 @@ const MainLayout = ({ children }) => {
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar />
-            <main className="flex-grow bg-gray-50">
+            <main className="flex-grow">
                 {children}
             </main>
-            <footer className="bg-gray-800 text-white p-4 text-center">
+            <footer className="glass mt-auto p-4 text-center text-gray-700">
                 &copy; 2025 AgriGuard
             </footer>
         </div>

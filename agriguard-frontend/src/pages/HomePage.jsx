@@ -2,73 +2,82 @@ import React from 'react';
 
 const HomePage = () => {
     return (
-        <main className="min-h-screen bg-gray-50">
-            <section className="max-w-6xl mx-auto px-6 py-20">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="min-h-full">
+            <section className="max-w-7xl mx-auto px-6 py-20">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Left: Headline + CTA */}
-                    <div>
-                        <div className="inline-block mb-4 rounded-full bg-white/60 px-4 py-2 text-sm text-gray-700">
-                            Introducing plant-health insights
+                    <div className="space-y-8">
+                        <div className="inline-block rounded-full glass px-4 py-2 text-sm font-medium text-gray-700">
+                            ✨ Introducing AI-powered plant health insights
                         </div>
 
-                        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight text-gray-900">
-                            <span className="text-pink-400 underline decoration-pink-300 decoration-4 underline-offset-6">Stress-Free</span>
-                            <span className="ml-4">Plant Health Monitoring</span>
+                        <h1 className="text-5xl md:text-7xl font-extrabold leading-tight text-gray-900 tracking-tight">
+                            The Complete <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">
+                                Plant Diagnosis
+                            </span>
+                            <br /> Platform
                         </h1>
 
-                        <p className="mt-6 text-lg text-gray-600 max-w-xl">
-                            AgriGuard brings images, analytics and diagnosis together in one simple
-                            platform — helping you spot issues earlier and get targeted treatment faster.
+                        <p className="text-xl text-gray-600 max-w-lg leading-relaxed">
+                            From detection to treatment, AgriGuard brings every part of your crop management into one organized, intelligent space.
                         </p>
 
-                        <div className="mt-8 flex items-center gap-4">
+                        <div className="flex items-center gap-4 pt-4">
                             <a
                                 href="/diagnosis"
-                                className="inline-flex items-center justify-center rounded-full px-8 py-3 bg-gradient-to-r from-pink-400 to-yellow-400 text-black font-semibold shadow-lg hover:opacity-95"
+                                className="inline-flex items-center justify-center rounded-full px-8 py-4 bg-gray-900 text-white font-bold text-lg shadow-xl hover:bg-gray-800 transition-transform hover:scale-105"
                             >
                                 Get Started
                             </a>
 
-                            <a href="/help" className="text-sm text-gray-700 hover:underline">
-                                Learn more →
+                            <a href="/help" className="inline-flex items-center justify-center rounded-full px-8 py-4 glass text-gray-800 font-semibold hover:bg-white/40 transition-colors">
+                                Learn more
                             </a>
                         </div>
 
-                        <div className="mt-10 text-gray-500 text-sm">
-                            <div className="flex items-center gap-6 flex-wrap">
-                                <span className="uppercase tracking-wider">Trusted by</span>
-                                <div className="flex items-center gap-4 opacity-90">
-                                    <span className="px-3 py-2 bg-white rounded shadow-sm">Digital Brew</span>
-                                    <span className="px-3 py-2 bg-white rounded shadow-sm">FarmStore</span>
-                                    <span className="px-3 py-2 bg-white rounded shadow-sm">IdeaMachine</span>
-                                    <span className="px-3 py-2 bg-white rounded shadow-sm">Planet Nutshell</span>
-                                </div>
+                        <div className="pt-12">
+                            <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-6">Trusted by farmers worldwide</p>
+                            <div className="flex flex-wrap gap-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                                {/* Placeholder Logos using glass chips for now */}
+                                {['AgriTech', 'FarmCo', 'GreenGrow', 'NatureFirst'].map((brand) => (
+                                    <div key={brand} className="glass px-4 py-2 rounded-lg font-bold text-gray-600">
+                                        {brand}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
 
                     {/* Right: Hero image / screenshot placeholder */}
-                    <div className="flex justify-center lg:justify-end">
-                        <div className="w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden">
-                            <img
-                                src="/index.png"
-                                alt="App preview"
-                                className="w-full h-72 object-cover"
-                                onError={(e) => {
-                                    // fallback: simple colored box when image not found
-                                    e.currentTarget.style.display = 'none';
-                                }}
-                            />
+                    <div className="relative">
+                        {/* Decorative blobs behind the card */}
+                        <div className="absolute -top-20 -right-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+                        <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+                        <div className="absolute -bottom-40 right-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
 
-                            <div className="p-6">
-                                <h3 className="text-xl font-semibold text-gray-800">Dashboard preview</h3>
-                                <p className="mt-2 text-gray-500">View crop health trends and recent diagnoses at a glance.</p>
+                        <div className="relative glass-card p-2 transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                            <div className="bg-white/50 rounded-xl overflow-hidden shadow-inner">
+                                <div className="h-8 bg-white/40 border-b border-white/20 flex items-center px-4 gap-2">
+                                    <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                                </div>
+                                <img
+                                    src="/index.png"
+                                    alt="App Dashboard Preview"
+                                    className="w-full h-auto object-cover"
+                                    onError={(e) => {
+                                        e.currentTarget.style.display = 'none';
+                                        e.currentTarget.parentElement.innerHTML += '<div class="h-64 flex items-center justify-center text-gray-400">Dashboard Preview Image</div>';
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-        </main>
+        </div>
     );
 };
 
