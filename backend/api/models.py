@@ -14,6 +14,12 @@ class AnalysisResult(models.Model):
     # Image
     image = models.ImageField(upload_to='uploads/%Y/%m/%d/')
     
+    # Integrity & Security
+    image_hash = models.CharField(max_length=64, blank=True, null=True, help_text="SHA-256 hash of the original image for integrity check")
+    digital_signature = models.TextField(blank=True, null=True, help_text="Digital signature of the image")
+    public_key = models.TextField(blank=True, null=True, help_text="Public key used for signature verification")
+    signature_verified = models.BooleanField(default=False, help_text="Whether the digital signature was verified")
+    
     # ML Results
     disease_name = models.CharField(max_length=200, blank=True, null=True)
     confidence_score = models.FloatField(blank=True, null=True, help_text="Confidence score (0-1)")
