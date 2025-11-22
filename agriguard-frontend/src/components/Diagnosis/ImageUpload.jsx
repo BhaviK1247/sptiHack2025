@@ -1,11 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { uploadImage } from '../../services/diagnosisService';
+import { useAuth } from '../../context/AuthContext';
 
 const ImageUpload = ({ onAnalyze }) => {
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const { currentUser } = useAuth();
 
     const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
         setError(null);
@@ -47,11 +50,27 @@ const ImageUpload = ({ onAnalyze }) => {
         if (!file) return;
 
         setIsLoading(true);
-        // Simulate API call
-        setTimeout(() => {
+        setError(null);
+        
+        try {
+            const formData = new FormData();
+            formData.append('image', file);
+            if (currentUser?.email) {
+                formData.append('user_email', currentUser.email);
+            }
+            
+            const result = await uploadImage(formData);
+            
+            // Pass the result to parent component
+            if (onAnalyze) {
+                onAnalyze(result);
+            }
+        } catch (err) {
+            console.error('Upload error:', err);
+            setError(err.response?.data?.message || 'Failed to analyze image. Please try again.');
+        } finally {
             setIsLoading(false);
-            onAnalyze(file);
-        }, 2000);
+        }
     };
 
     return (

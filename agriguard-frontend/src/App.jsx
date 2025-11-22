@@ -8,24 +8,45 @@ import DiagnosisPage from './pages/DiagnosisPage';
 import ResultsPage from './pages/ResultsPage';
 import DashboardPage from './pages/DashboardPage';
 import HelpPage from './pages/HelpPage';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
     return (
-        <AppProvider>
-            <DiagnosisProvider>
-                <Router>
-                    <MainLayout>
+        <AuthProvider>
+            <AppProvider>
+                <DiagnosisProvider>
+                    <Router>
                         <Routes>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/diagnosis" element={<DiagnosisPage />} />
-                            <Route path="/results" element={<ResultsPage />} />
-                            <Route path="/dashboard" element={<DashboardPage />} />
-                            <Route path="/help" element={<HelpPage />} />
+                            <Route path="/" element={
+                                <MainLayout>
+                                    <HomePage />
+                                </MainLayout>
+                            } />
+                            <Route path="/diagnosis" element={
+                                <MainLayout>
+                                    <DiagnosisPage />
+                                </MainLayout>
+                            } />
+                            <Route path="/results" element={
+                                <MainLayout>
+                                    <ResultsPage />
+                                </MainLayout>
+                            } />
+                            <Route path="/dashboard" element={
+                                <MainLayout>
+                                    <DashboardPage />
+                                </MainLayout>
+                            } />
+                            <Route path="/help" element={
+                                <MainLayout>
+                                    <HelpPage />
+                                </MainLayout>
+                            } />
                         </Routes>
-                    </MainLayout>
-                </Router>
-            </DiagnosisProvider>
-        </AppProvider>
+                    </Router>
+                </DiagnosisProvider>
+            </AppProvider>
+        </AuthProvider>
     );
 }
 
