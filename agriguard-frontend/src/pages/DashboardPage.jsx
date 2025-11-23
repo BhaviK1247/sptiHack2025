@@ -4,6 +4,7 @@ import StatsCard from '../components/Dashboard/StatsCard';
 import RecentDiagnosesTable from '../components/Dashboard/RecentDiagnosesTable';
 import StatsModal from '../components/Dashboard/StatsModal';
 
+
 const DashboardPage = () => {
     const [selectedStat, setSelectedStat] = useState(null);
 
@@ -105,12 +106,10 @@ const DashboardPage = () => {
                         </button>
                     </div>
 
-                    {/* Disease Distribution (Placeholder for Pie Chart) */}
-                    <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-                        <h3 className="text-lg font-bold text-gray-800 mb-4">Disease Distribution</h3>
-                        <div className="h-48 flex items-center justify-center bg-gray-50 rounded-xl border border-dashed border-gray-200">
-                            <p className="text-gray-400 text-sm">Chart Visualization</p>
-                        </div>
+                    {/* Disease Map */}
+                    {/* Disease Map Placeholder */}
+                    <div className="h-96 bg-gray-100 rounded-3xl flex items-center justify-center">
+                        <p className="text-gray-500">Map Temporarily Disabled</p>
                     </div>
                 </div>
             </div>

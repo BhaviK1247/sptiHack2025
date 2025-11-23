@@ -1,4 +1,5 @@
 import React from 'react';
+import FeatureSlider from '../components/Home/FeatureSlider';
 
 const HomePage = () => {
     return (
@@ -77,6 +78,9 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Feature Slider Section */}
+            <FeatureSlider />
         </div>
     );
 };
