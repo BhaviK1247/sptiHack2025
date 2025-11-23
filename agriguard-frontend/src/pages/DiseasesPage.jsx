@@ -9,128 +9,706 @@ const DiseasesPage = () => {
     const diseases = [
         {
             id: 1,
+            name: 'Apple Scab',
+            scientific: 'Venturia inaequalis',
+            crop: 'Apple',
+            severity: 'Moderate',
+            confidence: '95-99%',
+            image: 'https://image.pollinations.ai/prompt/apple%20scab%20leaf%20disease%20macro%20photo',
+            symptoms: [
+                'Olive-green to black velvety spots on leaves',
+                'Scab-like lesions on fruit',
+                'Yellowing and premature leaf drop',
+                'Fruit distortion and cracking'
+            ],
+            treatment: [
+                'Apply fungicides like Captan or Sulfur',
+                'Prune to improve air circulation',
+                'Remove and destroy fallen leaves',
+                'Plant resistant varieties'
+            ],
+            prevention: [
+                'Sanitize tools between cuts',
+                'Rake and dispose of leaves in autumn',
+                'Avoid overhead irrigation'
+            ],
+            season: 'Spring, cool and wet weather',
+            spread: 'Wind and rain splash'
+        },
+        {
+            id: 2,
+            name: 'Black Rot',
+            scientific: 'Botryosphaeria obtusa',
+            crop: 'Apple',
+            severity: 'Severe',
+            confidence: '94-98%',
+            image: 'https://image.pollinations.ai/prompt/apple%20black%20rot%20fruit%20disease',
+            symptoms: [
+                'Purple spots on leaves (frog-eye leaf spot)',
+                'Rotting fruit with black concentric rings',
+                'Cankers on limbs and branches',
+                'Mummified fruit remaining on tree'
+            ],
+            treatment: [
+                'Prune out infected branches and cankers',
+                'Remove mummified fruit',
+                'Apply appropriate fungicides'
+            ],
+            prevention: [
+                'Maintain tree health and vigor',
+                'Protect from mechanical injury',
+                'Burn infected prunings'
+            ],
+            season: 'Warm, humid weather',
+            spread: 'Spores from cankers and mummies'
+        },
+        {
+            id: 3,
+            name: 'Cedar Apple Rust',
+            scientific: 'Gymnosporangium juniperi-virginianae',
+            crop: 'Apple',
+            severity: 'Moderate',
+            confidence: '96-99%',
+            image: 'https://image.pollinations.ai/prompt/cedar%20apple%20rust%20leaf%20spots',
+            symptoms: [
+                'Bright orange-yellow spots on leaves',
+                'Tube-like structures on fruit undersides',
+                'Premature defoliation',
+                'Reduced fruit quality'
+            ],
+            treatment: [
+                'Apply fungicides (Myclobutanil)',
+                'Remove nearby juniper/cedar hosts',
+                'Prune galls from cedar trees'
+            ],
+            prevention: [
+                'Plant resistant apple varieties',
+                'Remove Eastern Red Cedar within 2 miles',
+                'Monitor for galls in spring'
+            ],
+            season: 'Spring, wet weather',
+            spread: 'Wind-blown spores from cedar trees'
+        },
+        {
+            id: 4,
+            name: 'Powdery Mildew',
+            scientific: 'Podosphaera clandestina',
+            crop: 'Cherry',
+            severity: 'Mild',
+            confidence: '97-99%',
+            image: 'https://image.pollinations.ai/prompt/cherry%20powdery%20mildew%20white%20fungus%20on%20leaf',
+            symptoms: [
+                'White powdery growth on leaves and fruit',
+                'Leaf curling and distortion',
+                'Stunted shoot growth',
+                'Premature leaf drop'
+            ],
+            treatment: [
+                'Apply sulfur or potassium bicarbonate',
+                'Prune for better light and airflow',
+                'Use fungicides if severe'
+            ],
+            prevention: [
+                'Plant in full sun',
+                'Avoid excessive nitrogen fertilizer',
+                'Maintain good air circulation'
+            ],
+            season: 'Warm, dry days and cool nights',
+            spread: 'Wind-blown spores'
+        },
+        {
+            id: 5,
+            name: 'Gray Leaf Spot',
+            scientific: 'Cercospora zeae-maydis',
+            crop: 'Corn',
+            severity: 'Moderate',
+            confidence: '93-97%',
+            image: 'https://image.pollinations.ai/prompt/corn%20gray%20leaf%20spot%20disease',
+            symptoms: [
+                'Rectangular gray to tan lesions',
+                'Lesions run parallel to leaf veins',
+                'Entire leaves may turn brown and die',
+                'Reduced grain fill'
+            ],
+            treatment: [
+                'Apply foliar fungicides',
+                'Rotate crops',
+                'Plant resistant hybrids'
+            ],
+            prevention: [
+                'Manage crop residue',
+                'Avoid continuous corn planting',
+                'Monitor fields regularly'
+            ],
+            season: 'Warm, humid conditions',
+            spread: 'Wind and rain splash'
+        },
+        {
+            id: 6,
+            name: 'Common Rust',
+            scientific: 'Puccinia sorghi',
+            crop: 'Corn',
+            severity: 'Mild',
+            confidence: '98-100%',
+            image: 'https://image.pollinations.ai/prompt/corn%20common%20rust%20leaf%20pustules',
+            symptoms: [
+                'Cinnamon-brown pustules on leaf surfaces',
+                'Pustules turn black as plant matures',
+                'Yellowing around pustules',
+                'Stunted growth in severe cases'
+            ],
+            treatment: [
+                'Fungicides (usually not necessary)',
+                'Plant resistant hybrids',
+                'Early planting'
+            ],
+            prevention: [
+                'Use resistant varieties',
+                'Monitor for early signs',
+                'Crop rotation'
+            ],
+            season: 'Cool, moist weather',
+            spread: 'Wind-blown spores'
+        },
+        {
+            id: 7,
+            name: 'Northern Leaf Blight',
+            scientific: 'Exserohilum turcicum',
+            crop: 'Corn',
+            severity: 'Moderate',
+            confidence: '94-98%',
+            image: 'https://image.pollinations.ai/prompt/corn%20northern%20leaf%20blight%20lesions',
+            symptoms: [
+                'Long, cigar-shaped gray-green lesions',
+                'Lesions can be several inches long',
+                'Leaves turn brown and die',
+                'Reduced yield'
+            ],
+            treatment: [
+                'Fungicides at early tasseling',
+                'Crop rotation',
+                'Tillage to bury residue'
+            ],
+            prevention: [
+                'Plant resistant hybrids',
+                'Manage corn residue',
+                'Rotate with non-host crops'
+            ],
+            season: 'Moderate temperatures, wet weather',
+            spread: 'Wind and rain'
+        },
+        {
+            id: 8,
+            name: 'Black Rot',
+            scientific: 'Guignardia bidwellii',
+            crop: 'Grape',
+            severity: 'Severe',
+            confidence: '98-100%',
+            image: 'https://image.pollinations.ai/prompt/grape%20black%20rot%20fruit%20mummies',
+            symptoms: [
+                'Brown circular spots on leaves',
+                'Shriveled, black "mummy" berries',
+                'Lesions on stems and tendrils',
+                'Fruit drop'
+            ],
+            treatment: [
+                'Remove and destroy mummies',
+                'Apply fungicides (Mancozeb, Myclobutanil)',
+                'Prune for airflow'
+            ],
+            prevention: [
+                'Sanitation is key',
+                'Plant in sunny locations',
+                'Weed control'
+            ],
+            season: 'Warm, humid weather',
+            spread: 'Rain splash and wind'
+        },
+        {
+            id: 9,
+            name: 'Esca (Black Measles)',
+            scientific: 'Phaeomoniella chlamydospora',
+            crop: 'Grape',
+            severity: 'Severe',
+            confidence: '95-99%',
+            image: 'https://image.pollinations.ai/prompt/grape%20esca%20black%20measles%20disease',
+            symptoms: [
+                'Tiger-stripe pattern on leaves',
+                'Dark spotting on fruit ("measles")',
+                'Sudden wilting of vines',
+                'Wood rot'
+            ],
+            treatment: [
+                'No cure for established vines',
+                'Prune out infected wood',
+                'Protect pruning wounds'
+            ],
+            prevention: [
+                'Plant certified disease-free vines',
+                'Minimize pruning wounds',
+                'Remove dead vines'
+            ],
+            season: 'Summer',
+            spread: 'Wind-borne spores entering wounds'
+        },
+        {
+            id: 10,
+            name: 'Leaf Blight',
+            scientific: 'Pseudocercospora vitis',
+            crop: 'Grape',
+            severity: 'Moderate',
+            confidence: '96-99%',
+            image: 'https://image.pollinations.ai/prompt/grape%20leaf%20blight%20isariopsis',
+            symptoms: [
+                'Irregular brown spots with dark borders',
+                'Premature leaf drop',
+                'Reduced vine vigor',
+                'Sunburn on exposed fruit'
+            ],
+            treatment: [
+                'Fungicides',
+                'Manage canopy for airflow',
+                'Remove infected leaves'
+            ],
+            prevention: [
+                'Dormant sprays',
+                'Good sanitation',
+                'Balanced fertilization'
+            ],
+            season: 'Late summer, wet conditions',
+            spread: 'Rain splash'
+        },
+        {
+            id: 11,
+            name: 'Citrus Greening',
+            scientific: 'Candidatus Liberibacter asiaticus',
+            crop: 'Orange',
+            severity: 'Severe',
+            confidence: '98-100%',
+            image: 'https://image.pollinations.ai/prompt/citrus%20greening%20disease%20orange%20leaf',
+            symptoms: [
+                'Yellow mottling on leaves',
+                'Misshapen, bitter fruit',
+                'Fruit stays green at bottom',
+                'Tree decline and death'
+            ],
+            treatment: [
+                'No cure available',
+                'Remove infected trees immediately',
+                'Control psyllid vectors'
+            ],
+            prevention: [
+                'Use disease-free nursery stock',
+                'Monitor for Asian Citrus Psyllid',
+                'Quarantine regulations'
+            ],
+            season: 'Year-round',
+            spread: 'Asian Citrus Psyllid'
+        },
+        {
+            id: 12,
+            name: 'Bacterial Spot',
+            scientific: 'Xanthomonas campestris pv. pruni',
+            crop: 'Peach',
+            severity: 'Moderate',
+            confidence: '96-99%',
+            image: 'https://image.pollinations.ai/prompt/peach%20bacterial%20spot%20fruit%20damage',
+            symptoms: [
+                'Water-soaked spots on leaves',
+                'Shot-hole effect on leaves',
+                'Cracking and pitting of fruit',
+                'Twig cankers'
+            ],
+            treatment: [
+                'Copper sprays during dormancy',
+                'Antibiotic sprays (Oxytetracycline)',
+                'Balanced fertilization'
+            ],
+            prevention: [
+                'Plant resistant varieties',
+                'Avoid sandy sites',
+                'Windbreaks to reduce abrasion'
+            ],
+            season: 'Warm, wet spring',
+            spread: 'Wind-driven rain'
+        },
+        {
+            id: 13,
+            name: 'Bacterial Spot',
+            scientific: 'Xanthomonas campestris',
+            crop: 'Pepper',
+            severity: 'Moderate',
+            confidence: '95-98%',
+            image: 'https://image.pollinations.ai/prompt/pepper%20bacterial%20spot%20leaf%20lesions',
+            symptoms: [
+                'Small water-soaked spots on leaves',
+                'Spots turn brown with yellow halos',
+                'Raised spots on fruit',
+                'Leaf drop'
+            ],
+            treatment: [
+                'Copper-based bactericides',
+                'Remove infected plants',
+                'Avoid overhead watering'
+            ],
+            prevention: [
+                'Use treated seeds',
+                'Crop rotation',
+                'Mulching'
+            ],
+            season: 'Warm, humid weather',
+            spread: 'Splashing water and tools'
+        },
+        {
+            id: 14,
+            name: 'Early Blight',
+            scientific: 'Alternaria solani',
+            crop: 'Potato',
+            severity: 'Moderate',
+            confidence: '97-99%',
+            image: 'https://image.pollinations.ai/prompt/potato%20early%20blight%20leaf%20spots',
+            symptoms: [
+                'Target-like brown spots on older leaves',
+                'Yellowing around spots',
+                'Leaf drop',
+                'Dark lesions on tubers'
+            ],
+            treatment: [
+                'Fungicides (Chlorothalonil)',
+                'Maintain plant vigor',
+                'Harvest when vines are completely dead'
+            ],
+            prevention: [
+                'Crop rotation',
+                'Use certified seed',
+                'Proper fertilization'
+            ],
+            season: 'Mid to late season',
+            spread: 'Wind and rain'
+        },
+        {
+            id: 15,
+            name: 'Late Blight',
+            scientific: 'Phytophthora infestans',
+            crop: 'Potato',
+            severity: 'Severe',
+            confidence: '95-99%',
+            image: 'https://image.pollinations.ai/prompt/potato%20late%20blight%20leaf%20damage',
+            symptoms: [
+                'Large dark spots on leaves',
+                'White fuzzy mold on undersides',
+                'Brown rot on tubers',
+                'Rapid plant death'
+            ],
+            treatment: [
+                'Preventative fungicides',
+                'Kill vines before harvest',
+                'Destroy cull piles'
+            ],
+            prevention: [
+                'Plant resistant varieties',
+                'Eliminate volunteer plants',
+                'Monitor weather conditions'
+            ],
+            season: 'Cool, wet weather',
+            spread: 'Wind-borne spores'
+        },
+        {
+            id: 16,
+            name: 'Powdery Mildew',
+            scientific: 'Podosphaera xanthii',
+            crop: 'Squash',
+            severity: 'Moderate',
+            confidence: '98-100%',
+            image: 'https://image.pollinations.ai/prompt/squash%20powdery%20mildew%20white%20spots',
+            symptoms: [
+                'White powdery spots on leaves and stems',
+                'Leaves turn yellow and dry out',
+                'Reduced fruit quality',
+                'Sunscald on exposed fruit'
+            ],
+            treatment: [
+                'Fungicides',
+                'Neem oil',
+                'Remove infected leaves'
+            ],
+            prevention: [
+                'Plant resistant varieties',
+                'Good air circulation',
+                'Avoid shade'
+            ],
+            season: 'Warm, dry weather',
+            spread: 'Wind'
+        },
+        {
+            id: 17,
+            name: 'Leaf Scorch',
+            scientific: 'Diplocarpon earliana',
+            crop: 'Strawberry',
+            severity: 'Moderate',
+            confidence: '98-100%',
+            image: 'https://image.pollinations.ai/prompt/strawberry%20leaf%20scorch%20disease',
+            symptoms: [
+                'Irregular purple blotches on leaves',
+                'Leaves curl and dry up',
+                'Lesions on petioles and fruit stalks',
+                'Reduced vigor'
+            ],
+            treatment: [
+                'Fungicides',
+                'Remove infected leaves',
+                'Renovate beds after harvest'
+            ],
+            prevention: [
+                'Plant resistant varieties',
+                'Ensure good drainage',
+                'Weed control'
+            ],
+            season: 'Wet spring and autumn',
+            spread: 'Splashing water'
+        },
+        {
+            id: 18,
+            name: 'Bacterial Spot',
+            scientific: 'Xanthomonas campestris',
+            crop: 'Tomato',
+            severity: 'Moderate',
+            confidence: '95-98%',
+            image: 'https://image.pollinations.ai/prompt/tomato%20bacterial%20spot%20leaf',
+            symptoms: [
+                'Small dark spots on leaves',
+                'Scabby spots on fruit',
+                'Yellowing and leaf drop',
+                'Blossom drop'
+            ],
+            treatment: [
+                'Copper sprays',
+                'Remove infected plants',
+                'Avoid overhead irrigation'
+            ],
+            prevention: [
+                'Use disease-free seeds',
+                'Crop rotation',
+                'Mulching'
+            ],
+            season: 'Warm, wet weather',
+            spread: 'Rain splash'
+        },
+        {
+            id: 19,
             name: 'Early Blight',
             scientific: 'Alternaria solani',
             crop: 'Tomato',
             severity: 'Moderate',
-            confidence: '92-96%',
-            image: 'https://via.placeholder.com/400x300/10b981/ffffff?text=Early+Blight',
+            confidence: '90-95%',
+            image: 'https://image.pollinations.ai/prompt/tomato%20early%20blight%20leaf%20concentric%20rings',
             symptoms: [
-                'Round brown spots with concentric target-like rings on older leaves',
-                'Yellowing around the spots',
-                'Leaf drop in severe cases',
-                'Dark lesions on stems and fruit'
+                'Target-like spots on lower leaves',
+                'Yellowing around spots',
+                'Stem lesions',
+                'Fruit rot'
             ],
             treatment: [
-                'Remove and destroy affected leaves immediately',
-                'Apply copper-based fungicide every 7-10 days',
-                'Improve air circulation by proper spacing',
-                'Avoid overhead watering',
-                'Rotate crops annually'
+                'Fungicides',
+                'Stake plants',
+                'Mulch to prevent soil splash'
             ],
             prevention: [
-                'Use disease-resistant varieties',
-                'Mulch around plants to prevent soil splash',
-                'Water at the base of plants',
-                'Remove plant debris at end of season'
+                'Crop rotation',
+                'Proper spacing',
+                'Remove debris'
             ],
-            season: 'Mid-summer, hot weather (77-86°F)',
-            spread: 'Fungal spores spread by wind, rain, and contaminated tools'
+            season: 'Warm, humid weather',
+            spread: 'Wind and rain'
         },
         {
-            id: 2,
+            id: 20,
             name: 'Late Blight',
             scientific: 'Phytophthora infestans',
             crop: 'Tomato',
             severity: 'Severe',
-            confidence: '94-98%',
-            image: 'https://via.placeholder.com/400x300/ef4444/ffffff?text=Late+Blight',
+            confidence: '90-96%',
+            image: 'https://image.pollinations.ai/prompt/tomato%20late%20blight%20leaf%20damage',
             symptoms: [
-                'Dark water-soaked spots that enlarge rapidly',
-                'White fuzzy mold on leaf undersides',
-                'Brown lesions on stems',
-                'Firm brown rot on fruit',
-                'Entire plant can collapse within days'
+                'Greasy dark spots on leaves',
+                'White mold on undersides',
+                'Brown firm rot on fruit',
+                'Rapid collapse'
             ],
             treatment: [
-                'Immediate removal and destruction of infected plants',
-                'Apply fungicide containing chlorothalonil or mancozeb',
-                'Avoid overhead watering completely',
-                'Increase spacing between plants',
-                'Do not compost infected material'
+                'Immediate removal',
+                'Preventative fungicides',
+                'Avoid overhead watering'
             ],
             prevention: [
-                'Plant certified disease-free seeds',
-                'Avoid planting near potatoes',
-                'Ensure good drainage',
-                'Monitor weather for cool, wet conditions'
+                'Resistant varieties',
+                'Good airflow',
+                'Monitor weather'
             ],
-            season: 'Cool, wet weather (60-70°F with high humidity)',
-            spread: 'Highly contagious, spreads via wind-borne spores and water'
+            season: 'Cool, wet weather',
+            spread: 'Wind-borne spores'
         },
         {
-            id: 3,
-            name: 'Potato Virus Y',
-            scientific: 'PVY',
-            crop: 'Potato',
-            severity: 'Severe',
-            confidence: '87-93%',
-            image: 'https://via.placeholder.com/400x300/f59e0b/ffffff?text=Potato+Virus+Y',
+            id: 21,
+            name: 'Leaf Mold',
+            scientific: 'Passalora fulva',
+            crop: 'Tomato',
+            severity: 'Mild',
+            confidence: '96-99%',
+            image: 'https://image.pollinations.ai/prompt/tomato%20leaf%20mold%20yellow%20spots',
             symptoms: [
-                'Yellow mottling and mosaic patterns on leaves',
-                'Leaf distortion and curling',
-                'Stunted plant growth',
-                'Tuber necrosis (brown spots inside)',
-                'Reduced yield by up to 80%'
+                'Yellow spots on upper leaf surface',
+                'Olive-green mold on undersides',
+                'Leaf curling and death',
+                'Blossom drop'
             ],
             treatment: [
-                'No cure available - remove infected plants',
-                'Control aphid populations with insecticides',
-                'Use reflective mulches to deter aphids',
-                'Destroy volunteer potato plants',
-                'Sanitize tools between plants'
+                'Fungicides',
+                'Reduce humidity',
+                'Improve airflow'
             ],
             prevention: [
-                'Use certified virus-free seed potatoes',
-                'Plant resistant varieties',
-                'Control aphid vectors early in season',
-                'Remove infected plants immediately',
-                'Maintain weed-free fields'
+                'Resistant varieties',
+                'Ventilate greenhouses',
+                'Avoid wetting leaves'
             ],
-            season: 'Throughout growing season, peak in warm weather',
-            spread: 'Transmitted by aphids and mechanical contact'
+            season: 'High humidity',
+            spread: 'Wind and air currents'
         },
         {
-            id: 4,
-            name: "Stewart's Wilt",
-            scientific: 'Erwinia stewartii',
-            crop: 'Corn',
+            id: 22,
+            name: 'Septoria Leaf Spot',
+            scientific: 'Septoria lycopersici',
+            crop: 'Tomato',
             severity: 'Moderate',
-            confidence: '84-90%',
-            image: 'https://via.placeholder.com/400x300/8b5cf6/ffffff?text=Stewarts+Wilt',
+            confidence: '88-95%',
+            image: 'https://image.pollinations.ai/prompt/tomato%20septoria%20leaf%20spot',
             symptoms: [
-                'Long, pale green to yellow streaks on leaves',
-                'Leaf wilting and drying',
-                'Bacterial ooze visible in morning',
-                'Stunted plant growth',
-                'Premature death in severe cases'
+                'Small circular spots with gray centers',
+                'Dark borders around spots',
+                'Lower leaves affected first',
+                'Defoliation'
             ],
             treatment: [
-                'Plant resistant hybrid varieties',
-                'Control corn flea beetles with insecticides',
-                'Remove and destroy infected plants',
-                'Avoid planting in fields with history of disease',
-                'Use crop rotation with non-host crops'
+                'Fungicides',
+                'Remove lower leaves',
+                'Mulch'
             ],
             prevention: [
-                'Use treated seeds',
-                'Plant after soil warms (above 65°F)',
-                'Control flea beetle populations',
-                'Choose resistant hybrids',
-                'Avoid early planting in endemic areas'
+                'Crop rotation',
+                'Weed control',
+                'Sanitation'
             ],
-            season: 'Early to mid-season, warm weather',
-            spread: 'Transmitted by corn flea beetles and contaminated seeds'
+            season: 'Wet weather',
+            spread: 'Splashing water'
+        },
+        {
+            id: 23,
+            name: 'Spider Mites',
+            scientific: 'Tetranychus urticae',
+            crop: 'Tomato',
+            severity: 'Moderate',
+            confidence: '85-92%',
+            image: 'https://image.pollinations.ai/prompt/spider%20mites%20on%20tomato%20leaf',
+            symptoms: [
+                'Tiny yellow dots (stippling) on leaves',
+                'Fine webbing on plants',
+                'Leaves turn bronze or yellow',
+                'Plant decline'
+            ],
+            treatment: [
+                'Insecticidal soap',
+                'Miticides',
+                'Predatory mites'
+            ],
+            prevention: [
+                'Keep plants watered',
+                'Avoid dust',
+                'Monitor regularly'
+            ],
+            season: 'Hot, dry weather',
+            spread: 'Wind and movement'
+        },
+        {
+            id: 24,
+            name: 'Target Spot',
+            scientific: 'Corynespora cassiicola',
+            crop: 'Tomato',
+            severity: 'Moderate',
+            confidence: '88-93%',
+            image: 'https://image.pollinations.ai/prompt/tomato%20target%20spot%20disease',
+            symptoms: [
+                'Brown lesions with light centers',
+                'Target-like appearance',
+                'Fruit lesions with cracking',
+                'Leaf drop'
+            ],
+            treatment: [
+                'Fungicides',
+                'Improve airflow',
+                'Remove infected debris'
+            ],
+            prevention: [
+                'Resistant varieties',
+                'Crop rotation',
+                'Avoid overhead watering'
+            ],
+            season: 'Warm, humid weather',
+            spread: 'Wind and rain'
+        },
+        {
+            id: 25,
+            name: 'Yellow Leaf Curl Virus',
+            scientific: 'TYLCV',
+            crop: 'Tomato',
+            severity: 'Severe',
+            confidence: '98-100%',
+            image: 'https://image.pollinations.ai/prompt/tomato%20yellow%20leaf%20curl%20virus',
+            symptoms: [
+                'Upward curling of leaves',
+                'Yellowing of leaf margins',
+                'Stunted growth',
+                'Flower drop'
+            ],
+            treatment: [
+                'No cure',
+                'Remove infected plants',
+                'Control whiteflies'
+            ],
+            prevention: [
+                'Resistant varieties',
+                'Reflective mulches',
+                'Fine mesh screens'
+            ],
+            season: 'Warm season',
+            spread: 'Whiteflies'
+        },
+        {
+            id: 26,
+            name: 'Mosaic Virus',
+            scientific: 'ToMV',
+            crop: 'Tomato',
+            severity: 'Moderate',
+            confidence: '97-99%',
+            image: 'https://image.pollinations.ai/prompt/tomato%20mosaic%20virus%20leaf%20pattern',
+            symptoms: [
+                'Mottled light and dark green leaves',
+                'Fern-like leaf appearance',
+                'Stunted fruit with brown spots',
+                'Reduced yield'
+            ],
+            treatment: [
+                'No cure',
+                'Remove infected plants',
+                'Sanitize tools'
+            ],
+            prevention: [
+                'Resistant varieties',
+                'Wash hands (tobacco users)',
+                'Weed control'
+            ],
+            season: 'Any time',
+            spread: 'Mechanical contact and seeds'
         }
     ];
 

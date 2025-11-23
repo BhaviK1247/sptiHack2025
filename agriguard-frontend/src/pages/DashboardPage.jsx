@@ -42,9 +42,9 @@ const DashboardPage = () => {
             delay: 300,
             type: 'pie',
             chartData: [
-                { label: 'Blight', value: 150, color: '#ef4444' },
-                { label: 'Mildew', value: 100, color: '#f97316' },
-                { label: 'Rot', value: 80, color: '#8b5cf6' },
+                { label: 'Early Blight', value: 150, color: '#ef4444' },
+                { label: 'Powdery Mildew', value: 100, color: '#f97316' },
+                { label: 'Leaf Spot', value: 80, color: '#8b5cf6' },
                 { label: 'Other', value: 62, color: '#64748b' }
             ]
         },
@@ -102,7 +102,7 @@ const DashboardPage = () => {
                         <p className="text-gray-400 text-sm mb-6">Upload a photo to check for diseases instantly.</p>
 
                         <button className="w-full py-3 bg-gradient-to-r from-pink-400 to-yellow-400 rounded-xl text-gray-900 font-bold hover:opacity-95 transition-opacity flex items-center justify-center gap-2">
-                            <span>📸</span> Upload Photo
+                            <span></span> Upload Photo
                         </button>
                     </div>
 

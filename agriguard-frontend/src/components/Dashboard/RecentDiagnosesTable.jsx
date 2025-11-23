@@ -7,7 +7,7 @@ const RecentDiagnosesTable = () => {
             date: '2025-09-02',
             time: '09:30 AM',
             image: '/leaf1.jpg', // Placeholder
-            disease: 'Tomato Blight',
+            disease: 'Late Blight',
             confidence: 98,
             status: 'Critical',
             recommendation: 'Apply fungicide immediately',
@@ -27,7 +27,7 @@ const RecentDiagnosesTable = () => {
             date: '2025-09-01',
             time: '04:45 PM',
             image: '/leaf3.jpg', // Placeholder
-            disease: 'Leaf Spot',
+            disease: 'Septoria Leaf Spot',
             confidence: 85,
             status: 'Warning',
             recommendation: 'Monitor closely',

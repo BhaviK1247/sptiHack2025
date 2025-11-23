@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
     Search, Rocket, Camera, Leaf, BarChart3, HelpCircle, Mail,
     MessageSquare, Bug, Lightbulb, MessageCircle, Phone, ChevronDown,
-    ChevronUp, Check, X, Download, ExternalLink, Clock, Users, Mic
+    ChevronUp, Check, X, ExternalLink, Clock, Users, Mic
 } from 'lucide-react';
 
 const HelpPage = () => {
@@ -37,49 +37,6 @@ const HelpPage = () => {
         { id: 'dashboard', icon: BarChart3, title: 'Dashboard Guide', desc: 'Understand your analytics and history', color: 'purple' },
         { id: 'faq', icon: HelpCircle, title: 'FAQs', desc: 'Quick answers to common questions', color: 'orange' },
         { id: 'contact', icon: Mail, title: 'Contact Support', desc: 'Get help from our team', color: 'red' }
-    ];
-
-    const diseases = [
-        {
-            crop: 'Tomato',
-            name: 'Early Blight',
-            scientific: 'Alternaria solani',
-            symptoms: 'Round brown spots with target-like rings on older leaves, yellowing around spots',
-            severity: 'Moderate to Severe',
-            confidence: '92-96%',
-            season: 'Mid-summer, hot weather (77-86°F)',
-            treatment: 'Remove affected leaves, apply copper fungicide, improve air circulation'
-        },
-        {
-            crop: 'Tomato',
-            name: 'Late Blight',
-            scientific: 'Phytophthora infestans',
-            symptoms: 'Dark water-soaked spots that enlarge rapidly, white mold on leaf undersides',
-            severity: 'Severe',
-            confidence: '94-98%',
-            season: 'Cool, wet weather',
-            treatment: 'Immediate removal of infected plants, fungicide application, avoid overhead watering'
-        },
-        {
-            crop: 'Potato',
-            name: 'Potato Virus Y',
-            scientific: 'PVY',
-            symptoms: 'Yellow mottling on leaves, tuber necrosis, stunted growth',
-            severity: 'Severe',
-            confidence: '87-93%',
-            season: 'Throughout growing season',
-            treatment: 'Use certified seed potatoes, control aphid vectors, remove infected plants'
-        },
-        {
-            crop: 'Corn',
-            name: "Stewart's Wilt",
-            scientific: 'Erwinia stewartii',
-            symptoms: 'Leaf wilting, yellow-green streaks, bacterial ooze',
-            severity: 'Moderate to Severe',
-            confidence: '84-90%',
-            season: 'Early to mid-season',
-            treatment: 'Plant resistant hybrids, control flea beetles, crop rotation'
-        }
     ];
 
     const faqs = {
@@ -136,12 +93,6 @@ const HelpPage = () => {
     const toggleFaq = (category, index) => {
         const key = `${category}-${index}`;
         setExpandedFaq(expandedFaq === key ? null : key);
-    };
-
-    const getSeverityColor = (severity) => {
-        if (severity.includes('Severe')) return 'bg-red-50 text-red-700 border-red-200';
-        if (severity.includes('Moderate')) return 'bg-yellow-50 text-yellow-700 border-yellow-200';
-        return 'bg-green-50 text-green-700 border-green-200';
     };
 
     return (
@@ -216,7 +167,7 @@ const HelpPage = () => {
                         return (
                             <a
                                 key={cat.id}
-                                href={`#${cat.id}`}
+                                href={cat.id.startsWith('/') ? cat.id : `#${cat.id}`}
                                 className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 border border-gray-200"
                             >
                                 <div className={`w-12 h-12 rounded-xl ${getColorClasses(cat.color)} flex items-center justify-center mb-4`}>
@@ -430,7 +381,7 @@ const HelpPage = () => {
                             ].map((social, idx) => (
                                 <a
                                     key={idx}
-                                    href="#"
+                                    href="#!"
                                     className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                                 >
                                     <ExternalLink size={16} />

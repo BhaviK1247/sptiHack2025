@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, ArrowRight, Upload, FileText, BarChart3, HelpCircle, User, Bell } from 'lucide-react';
+import { ChevronRight, ArrowRight, Upload, FileText, BarChart3, HelpCircle, User, Bell } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 
@@ -68,10 +68,7 @@ const FeatureSlider = () => {
     }, [isPaused, features.length]);
 
     const goToSlide = index => setCurrentSlide(index);
-    const goToPrevious = () => setCurrentSlide(prev => (prev - 1 + features.length) % features.length);
     const goToNext = () => setCurrentSlide(prev => (prev + 1) % features.length);
-
-    const currentFeature = features[currentSlide];
 
     return (
         <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
