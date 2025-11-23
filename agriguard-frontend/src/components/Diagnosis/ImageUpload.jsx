@@ -2,9 +2,13 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { uploadImage } from '../../services/diagnosisService';
 import { useAuth } from '../../context/AuthContext';
+import { calculateImageHash, generateKeyPair, signFile, exportPublicKey } from '../../utils/crypto';
 
 const ImageUpload = ({ onAnalyze }) => {
     const [file, setFile] = useState(null);
+    const [imageHash, setImageHash] = useState(null);
+    const [digitalSignature, setDigitalSignature] = useState(null);
+    const [publicKey, setPublicKey] = useState(null);
     const [preview, setPreview] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -28,6 +32,23 @@ const ImageUpload = ({ onAnalyze }) => {
         const selectedFile = acceptedFiles[0];
         setFile(selectedFile);
         setPreview(URL.createObjectURL(selectedFile));
+
+        // Calculate hash
+        calculateImageHash(selectedFile).then(hash => {
+            setImageHash(hash);
+        }).catch(err => {
+            console.error("Error calculating hash:", err);
+        });
+
+        // Generate Key Pair and Sign (Simulating Digital Signature)
+        generateKeyPair().then(async (keyPair) => {
+            const signature = await signFile(keyPair.privateKey, selectedFile);
+            const publicKeyPem = await exportPublicKey(keyPair.publicKey);
+            setDigitalSignature(signature);
+            setPublicKey(publicKeyPem);
+        }).catch(err => {
+            console.error("Error generating signature:", err);
+        });
     }, []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -43,6 +64,9 @@ const ImageUpload = ({ onAnalyze }) => {
         e.stopPropagation();
         setFile(null);
         setPreview(null);
+        setImageHash(null);
+        setDigitalSignature(null);
+        setPublicKey(null);
         setError(null);
     };
 
@@ -51,16 +75,25 @@ const ImageUpload = ({ onAnalyze }) => {
 
         setIsLoading(true);
         setError(null);
-        
+
         try {
             const formData = new FormData();
             formData.append('image', file);
             if (currentUser?.email) {
                 formData.append('user_email', currentUser.email);
             }
-            
+            if (imageHash) {
+                formData.append('image_hash', imageHash);
+            }
+            if (digitalSignature) {
+                formData.append('digital_signature', digitalSignature);
+            }
+            if (publicKey) {
+                formData.append('public_key', publicKey);
+            }
+
             const result = await uploadImage(formData);
-            
+
             // Pass the result to parent component
             if (onAnalyze) {
                 onAnalyze(result);
@@ -78,10 +111,10 @@ const ImageUpload = ({ onAnalyze }) => {
             <div
                 {...getRootProps()}
                 className={`relative border-2 border-dashed rounded-3xl p-10 text-center transition-all duration-300 cursor-pointer ${isDragActive
-                        ? 'border-pink-400 bg-pink-50'
-                        : error
-                            ? 'border-red-300 bg-red-50'
-                            : 'border-gray-300 hover:border-pink-300 hover:bg-gray-50'
+                    ? 'border-pink-400 bg-pink-50'
+                    : error
+                        ? 'border-red-300 bg-red-50'
+                        : 'border-gray-300 hover:border-pink-300 hover:bg-gray-50'
                     }`}
             >
                 <input {...getInputProps()} />
@@ -100,8 +133,21 @@ const ImageUpload = ({ onAnalyze }) => {
                             ✕
                         </button>
                         <p className="mt-4 text-sm text-gray-500 font-medium">{file.name}</p>
+                        {imageHash && (
+                            <div className="mt-4 p-3 bg-gray-50 rounded-xl border border-gray-200 text-xs font-mono text-gray-600 break-all text-left">
+                                <span className="font-bold text-gray-800 block mb-1">SHA-256 Hash (Integrity Check):</span>
+                                {imageHash}
+                            </div>
+                        )}
+                        {digitalSignature && (
+                            <div className="mt-2 p-3 bg-blue-50 rounded-xl border border-blue-200 text-xs font-mono text-blue-600 break-all text-left">
+                                <span className="font-bold text-blue-800 block mb-1">Digital Signature (RSA-PSS):</span>
+                                {digitalSignature.substring(0, 64)}...
+                            </div>
+                        )}
                     </div>
                 ) : (
+
                     <div className="py-10">
                         <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl text-gray-400">
                             📸
@@ -126,8 +172,8 @@ const ImageUpload = ({ onAnalyze }) => {
                 onClick={handleAnalyze}
                 disabled={!file || isLoading}
                 className={`w-full mt-8 py-4 rounded-xl font-bold text-lg shadow-lg transition-all duration-300 flex items-center justify-center gap-3 ${!file || isLoading
-                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                        : 'bg-gradient-to-r from-pink-400 to-yellow-400 text-gray-900 hover:opacity-95 hover:shadow-xl transform hover:-translate-y-1'
+                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-pink-400 to-yellow-400 text-gray-900 hover:opacity-95 hover:shadow-xl transform hover:-translate-y-1'
                     }`}
             >
                 {isLoading ? (

@@ -157,7 +157,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                                 <div className="w-full border-t border-gray-200"></div>
                             </div>
                             <div className="relative flex justify-center text-sm">
-                                <span className="px-2 bg-white/80 text-gray-500">Or continue with</span>
+                                <span className="px-2 bg-red/80 text-gray-500">OR</span>
                             </div>
                         </div>
 
@@ -168,7 +168,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
                             className="w-full py-3 rounded-xl bg-white border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 hover:border-gray-300 transition-all flex items-center justify-center gap-2"
                         >
                             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
-                            Google
+                            Continue with Google
                         </button>
                     </form>
 
