@@ -10,6 +10,23 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
+let app;
+let auth;
+let googleProvider;
+
+if (firebaseConfig.apiKey) {
+    try {
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        googleProvider = new GoogleAuthProvider();
+    } catch (error) {
+        console.error("Firebase initialization failed:", error);
+    }
+} else {
+    console.warn("Firebase API key missing. Running in mock mode.");
+    // Mock objects to prevent crashes
+    auth = { currentUser: null }; 
+    googleProvider = {};
+}
+
+export { auth, googleProvider };

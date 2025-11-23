@@ -2,17 +2,38 @@ import React, { useState } from 'react';
 import {
     Search, Rocket, Camera, Leaf, BarChart3, HelpCircle, Mail,
     MessageSquare, Bug, Lightbulb, MessageCircle, Phone, ChevronDown,
-    ChevronUp, Check, X, Download, ExternalLink, Clock, Users
+    ChevronUp, Check, X, Download, ExternalLink, Clock, Users, Mic
 } from 'lucide-react';
 
 const HelpPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [expandedFaq, setExpandedFaq] = useState(null);
+    const [isListening, setIsListening] = useState(false);
+
+    const startListening = () => {
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+
+            recognition.onstart = () => setIsListening(true);
+            recognition.onend = () => setIsListening(false);
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                setSearchQuery(transcript);
+            };
+
+            recognition.start();
+        } else {
+            alert("Your browser does not support voice search.");
+        }
+    };
 
     const categories = [
         { id: 'getting-started', icon: Rocket, title: 'Getting Started', desc: 'Learn how to upload your first image and get results', color: 'pink' },
         { id: 'photography', icon: Camera, title: 'Photography Tips', desc: 'Take better leaf photos for accurate diagnosis', color: 'blue' },
-        { id: 'diseases', icon: Leaf, title: 'Disease Database', desc: 'Browse 50+ plant diseases we can detect', color: 'green' },
+        { id: '/diseases', icon: Leaf, title: 'Disease Database', desc: 'Browse 50+ plant diseases we can detect', color: 'green' },
         { id: 'dashboard', icon: BarChart3, title: 'Dashboard Guide', desc: 'Understand your analytics and history', color: 'purple' },
         { id: 'faq', icon: HelpCircle, title: 'FAQs', desc: 'Quick answers to common questions', color: 'orange' },
         { id: 'contact', icon: Mail, title: 'Contact Support', desc: 'Get help from our team', color: 'red' }
@@ -147,8 +168,14 @@ const HelpPage = () => {
                             placeholder="Search for help... (e.g., 'tomato blight', 'upload error')"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-12 pr-4 py-4 rounded-xl text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-white/30 shadow-lg"
+                            className="w-full pl-12 pr-12 py-4 rounded-xl text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-white/30 shadow-lg"
                         />
+                        <button
+                            onClick={startListening}
+                            className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full transition-colors ${isListening ? 'bg-red-500 text-white animate-pulse' : 'text-gray-400 hover:text-pink-500'}`}
+                        >
+                            <Mic size={20} />
+                        </button>
                     </div>
 
                     {/* Quick Stats */}
@@ -174,13 +201,25 @@ const HelpPage = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {categories.map((cat) => {
                         const Icon = cat.icon;
+                        const getColorClasses = (color) => {
+                            const colorMap = {
+                                pink: 'bg-gradient-to-br from-pink-400 to-pink-600',
+                                blue: 'bg-gradient-to-br from-blue-400 to-blue-600',
+                                green: 'bg-gradient-to-br from-green-400 to-green-600',
+                                purple: 'bg-gradient-to-br from-purple-400 to-purple-600',
+                                orange: 'bg-gradient-to-br from-orange-400 to-orange-600',
+                                red: 'bg-gradient-to-br from-red-400 to-red-600'
+                            };
+                            return colorMap[color] || 'bg-gradient-to-br from-gray-400 to-gray-600';
+                        };
+
                         return (
                             <a
                                 key={cat.id}
                                 href={`#${cat.id}`}
                                 className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 border border-gray-200"
                             >
-                                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br from-${cat.color}-400 to-${cat.color}-600 flex items-center justify-center mb-4`}>
+                                <div className={`w-12 h-12 rounded-xl ${getColorClasses(cat.color)} flex items-center justify-center mb-4`}>
                                     <Icon className="text-white" size={24} />
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-800 mb-2">{cat.title}</h3>
@@ -254,7 +293,7 @@ const HelpPage = () => {
                                     'Use clean, dry leaves'
                                 ].map((tip, i) => (
                                     <li key={i} className="text-green-700 flex items-start gap-2">
-                                        <Check size={16} className="mt-1 flex-shrink-0" />
+                                        <Camera size={16} className="mt-1 flex-shrink-0 text-green-600" />
                                         <span>{tip}</span>
                                     </li>
                                 ))}
@@ -276,7 +315,7 @@ const HelpPage = () => {
                                     'Photograph wet leaves'
                                 ].map((tip, i) => (
                                     <li key={i} className="text-red-700 flex items-start gap-2">
-                                        <X size={16} className="mt-1 flex-shrink-0" />
+                                        <Camera size={16} className="mt-1 flex-shrink-0 text-red-600" />
                                         <span>{tip}</span>
                                     </li>
                                 ))}
@@ -286,62 +325,7 @@ const HelpPage = () => {
                 </div>
             </section>
 
-            {/* Disease Database */}
-            <section id="diseases" className="relative z-10 max-w-6xl mx-auto px-6 py-12">
-                <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-8">
-                    <div className="flex items-center gap-3 mb-6">
-                        <Leaf className="text-green-500" size={32} />
-                        <h2 className="text-3xl font-bold text-gray-800">Supported Diseases Database</h2>
-                    </div>
 
-                    <p className="text-gray-600 mb-6">
-                        Our AI model can detect 50+ plant diseases across multiple crops. Below are some of the most common diseases.
-                    </p>
-
-                    <div className="space-y-4">
-                        {diseases.map((disease, idx) => (
-                            <div key={idx} className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-                                    <div>
-                                        <div className="flex items-center gap-3 mb-2">
-                                            <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">
-                                                {disease.crop}
-                                            </span>
-                                            <h3 className="text-xl font-bold text-gray-800">{disease.name}</h3>
-                                        </div>
-                                        <p className="text-sm text-gray-500 italic">{disease.scientific}</p>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getSeverityColor(disease.severity)}`}>
-                                            {disease.severity}
-                                        </span>
-                                        <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-200">
-                                            {disease.confidence} accuracy
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div className="grid md:grid-cols-2 gap-4 text-sm">
-                                    <div>
-                                        <p className="font-semibold text-gray-700 mb-1">Symptoms:</p>
-                                        <p className="text-gray-600">{disease.symptoms}</p>
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-gray-700 mb-1">Treatment:</p>
-                                        <p className="text-gray-600">{disease.treatment}</p>
-                                    </div>
-                                </div>
-
-                                <div className="mt-3 pt-3 border-t border-gray-200">
-                                    <p className="text-sm text-gray-500">
-                                        <span className="font-semibold">Season:</span> {disease.season}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* FAQ Section */}
             <section id="faq" className="relative z-10 max-w-5xl mx-auto px-6 py-12">
